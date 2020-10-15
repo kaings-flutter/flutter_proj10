@@ -9,6 +9,42 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // when deal with multiple BlocProvider
+
+    // MultiBlocProvider(
+    //   providers: [
+    //     BlocProvider<BlocA>(
+    //       create: (BuildContext context) => BlocA(),
+    //     ),
+    //     BlocProvider<BlocB>(
+    //       create: (BuildContext context) => BlocB(),
+    //     ),
+    //     BlocProvider<BlocC>(
+    //       create: (BuildContext context) => BlocC(),
+    //     ),
+    //   ],
+    //   child: ChildAEtcEtc(),
+    // );
+
+    // ==============================================================
+
+    // when deal with multiple RepositoryProvider
+
+    // MultiRepositoryProvider(
+    //   providers: [
+    //     RepositoryProvider<RepositoryA>(
+    //       create: (BuildContext context) => RepositoryA(),
+    //     ),
+    //     RepositoryProvider<RepositoryB>(
+    //       create: (BuildContext context) => RepositoryB(),
+    //     ),
+    //     RepositoryProvider<RepositoryC>(
+    //       create: (BuildContext context) => RepositoryC(),
+    //     ),
+    //   ],
+    //   child: ChildAEtcEtc(),
+    // );
+
     return BlocProvider<CounterCubit>(
       create: (context) => CounterCubit(),
       child: MaterialApp(
@@ -59,6 +95,22 @@ class _MyHomePageState extends State<MyHomePage> {
       // - has `listenWhen` function as well
 
       // BlocConsumer is the combination of BlocListener + BlocBuilder
+
+      // when dealing with multiple BlocListener/BlocBuilder
+      // MultiBlocListener(
+      //   listeners: [
+      //     BlocListener<BlocA, BlocAState>(
+      //       listener: (context, state) {},
+      //     ),
+      //     BlocListener<BlocB, BlocBState>(
+      //       listener: (context, state) {},
+      //     ),
+      //     BlocListener<BlocC, BlocCState>(
+      //       listener: (context, state) {},
+      //     ),
+      //   ],
+      //   child: ChildAEtcEtc(),
+      // );
 
       body: Center(
         child: Column(
