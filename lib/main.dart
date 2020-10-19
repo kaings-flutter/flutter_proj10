@@ -23,56 +23,41 @@ class _MyAppState extends State<MyApp> {
   //    close it for us. But, in this case, we cannot use it because it will create new instance
   //    for each route. In this case, we use BlocProvider.value
   // ** in order to close it namually, we need to convert to StatefulWidget override dispose()
-  final _counterCubit = CounterCubit();
+  // final _counterCubit = CounterCubit();
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      routes: {
-        HomeScreen.routeName: (ctx) => BlocProvider.value(
-              // we CANNOT use the following.
-              // ** context.bloc<CounterCubit>() is used when we use BlocProvider where
-              //    CounterCubit provider will be created automatically
-              // ** since we create CounterCubit manually here, we can simply pass
-              //    the created instance
-
-              // value: context.bloc<CounterCubit>(),
-              value: _counterCubit,
-              child: HomeScreen(
+    return BlocProvider(
+      create: (ctx) => CounterCubit(),
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        routes: {
+          HomeScreen.routeName: (ctx) => HomeScreen(
                 title: 'Home Screen',
                 color: Colors.blueAccent,
               ),
-            ),
-        SecondScreen.routeName: (ctx) => BlocProvider.value(
-              // value: context.bloc<CounterCubit>(),
-              value: _counterCubit,
-              child: SecondScreen(
+          SecondScreen.routeName: (ctx) => SecondScreen(
                 title: 'Second Screen',
                 color: Colors.redAccent,
               ),
-            ),
-        ThirdScreen.routeName: (ctx) => BlocProvider.value(
-              // value: context.bloc<CounterCubit>(),
-              value: _counterCubit,
-              child: ThirdScreen(
+          ThirdScreen.routeName: (ctx) => ThirdScreen(
                 title: 'Third Screen',
                 color: Colors.greenAccent,
               ),
-            ),
-      },
+        },
+      ),
     );
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    // Since we instantiate it manually, we also need to manually dispose it
-    // to avoid memory leaks
-    _counterCubit.close();
-  }
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  //   // Since we instantiate it manually, we also need to manually dispose it
+  //   // to avoid memory leaks
+  //   _counterCubit.close();
+  // }
 }
