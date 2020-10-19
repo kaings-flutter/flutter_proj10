@@ -28,21 +28,16 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+    return BlocProvider<CounterCubit>(
+      create: (ctx) => CounterCubit(),
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        onGenerateRoute: _appRouter.onGeneraRoute,
       ),
-      onGenerateRoute: _appRouter.onGeneraRoute,
     );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    // Since we instantiate it manually, we also need to manually dispose it
-    // to avoid memory leaks
-    _appRouter.displose();
   }
 }
