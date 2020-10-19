@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../logic/cubit/counter_cubit.dart';
-import './third_screen.dart';
 
-class SecondScreen extends StatefulWidget {
-  static const routeName = '/second-screen';
+class ThirdScreen extends StatefulWidget {
+  static const routeName = '/third-screen';
 
-  SecondScreen({Key key, this.title, this.color}) : super(key: key);
+  ThirdScreen({Key key, this.title, this.color}) : super(key: key);
 
   final String title;
   final Color color;
 
   @override
-  _SecondScreenState createState() => _SecondScreenState();
+  _ThirdScreenState createState() => _ThirdScreenState();
 }
 
-class _SecondScreenState extends State<SecondScreen> {
+class _ThirdScreenState extends State<ThirdScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,16 +92,6 @@ class _SecondScreenState extends State<SecondScreen> {
                       context.bloc<CounterCubit>().increment();
                     }),
               ],
-            ),
-            SizedBox(
-              height: 25,
-            ),
-            MaterialButton(
-              color: widget.color,
-              onPressed: () {
-                Navigator.of(context).pushNamed(ThirdScreen.routeName);
-              },
-              child: Text('Go to Third Screen'),
             ),
           ],
         ),

@@ -4,6 +4,8 @@ import './second_screen.dart';
 import '../../logic/cubit/counter_cubit.dart';
 
 class HomeScreen extends StatefulWidget {
+  static const routeName = '/';
+
   HomeScreen({Key key, this.title, this.color}) : super(key: key);
 
   final String title;
@@ -98,29 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
             MaterialButton(
               color: widget.color,
               onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute<SecondScreen>(
-                    // BlocProvider wont know about SecondScreen.
-                    // we need to pass the value of the provider (instead of
-                    // creating new instance) so that it is still ONE SAME UNIQUE
-                    // provider that is on HomeScreen
-
-                    // **If you create new instance (value: CounterCubit()),
-                    //   it will be totally new instance (not the one in HomeScreen)
-                    // **Since we pass the value from the provider, the provider in
-                    //   SecondScreen still the SAME provider on HomeScreen (sharing same value)
-
-                    builder: (ctx) => BlocProvider.value(
-                      // we also need to use `context` of HomeScreen
-                      // using `ctx` (context of builder) will create new instance
-                      value: BlocProvider.of<CounterCubit>(context),
-                      child: SecondScreen(
-                        title: 'Second Screen',
-                        color: Colors.redAccent,
-                      ),
-                    ),
-                  ),
-                );
+                Navigator.of(context).pushNamed(SecondScreen.routeName);
               },
               child: Text('Go to Second Screen'),
             ),
