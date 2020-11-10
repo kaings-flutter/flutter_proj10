@@ -15,7 +15,11 @@ class CounterCubit extends Cubit<CounterState> {
   // when there is MOBILE connection (no WIFI), decrease the state by 1
   CounterCubit({@required this.internetCubit})
       : super(CounterState(counterValue: 0)) {
-    internetStreamSub = internetCubit.listen((internetState) {
+    monitorInternetCubit();
+  }
+
+  StreamSubscription<InternetState> monitorInternetCubit() {
+    return internetStreamSub = internetCubit.listen((internetState) {
       if (internetState is InternetConnected &&
           internetState.connectionType == ConnectionType.WIFI) {
         increment();
